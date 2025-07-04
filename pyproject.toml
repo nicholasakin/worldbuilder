@@ -7,7 +7,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+tensorflow = "^2.19.0"
+matplotlib = "^3.10.3"
+imageio = "^2.37.0"
+configargparse = "^1.7.1"
 
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
 
 [build-system]
 requires = ["poetry-core"]
