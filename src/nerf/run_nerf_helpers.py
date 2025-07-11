@@ -4,7 +4,8 @@ import tensorflow as tf
 import numpy as np
 import imageio
 import json
-
+# from keras import ops
+from tensorflow import keras
 
 # Misc utils
 
@@ -77,7 +78,8 @@ def get_embedder(multires, i=0):
 
 # Model architecture
 
-def init_nerf_model(D=8, W=256, input_ch=3, input_ch_views=3, output_ch=4, skips=[4], use_viewdirs=False):
+def init_nerf_model(D=8, W=256, input_ch=3, input_ch_views=3, output_ch=4,
+                    skips=[4], use_viewdirs=False):
 
     relu = tf.keras.layers.ReLU()
     def dense(W, act=relu): return tf.keras.layers.Dense(W, activation=act)
@@ -87,8 +89,10 @@ def init_nerf_model(D=8, W=256, input_ch=3, input_ch_views=3, output_ch=4, skips
     input_ch = int(input_ch)
     input_ch_views = int(input_ch_views)
 
-    inputs = tf.keras.Input(shape=(input_ch + input_ch_views))
+    inputs = tf.keras.Input(shape=((input_ch + input_ch_views),))
     inputs_pts, inputs_views = tf.split(inputs, [input_ch, input_ch_views], -1)
+    # inputs_pts, inputs_views = ops.split(inputs, [input_ch, input_ch_views], axis=-1)
+
     inputs_pts.set_shape([None, input_ch])
     inputs_views.set_shape([None, input_ch_views])
 
