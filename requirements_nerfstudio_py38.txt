@@ -134,7 +134,7 @@ nbclient==0.5.13
 nbconvert==7.2.5
 nbformat==5.9.2
 nerfacc==0.5.2
--e git+https://github.com/nerfstudio-project/nerfstudio.git@2adcc380c6c846fe032b1fe55ad2c960e170a215#egg=nerfstudio
+-e git+ssh://git@github.com/nicholasakin/worldbuilder.git@66db42cd485ccf77fdbf1580a45b49d9d6cb9c6e#egg=nerfstudio&subdirectory=src/nerfstudio
 nest-asyncio==1.6.0
 networkx==3.1
 ninja==1.11.1.4
