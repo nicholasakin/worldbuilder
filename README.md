@@ -62,3 +62,8 @@ https://www.kaggle.com/datasets/cantonioupao/prosopo-a-face-dataset-for-3d-recon
 ---
 Made with `poetry==1.8.3`
 
+
+1. Use conda to generate a python3.8 environment
+2. Install the nerf requirements found in `requirements_nerfstudio_py38.txt`
+3. Follow README for running nerfstudio found in the Quickstart, Secion #2. Training your first model!
+
