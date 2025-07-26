@@ -1,5 +1,5 @@
 [submodule "src/gaussian-splatting-lightning"]
-	path = src/gaussian-splatting-lighting
+	path = src/gaussian-splatting-lightning
 	url = git@github.com:yzslab/gaussian-splatting-lightning.git
 [submodule "src/nerfstudio"]
 	path = src/nerfstudio
