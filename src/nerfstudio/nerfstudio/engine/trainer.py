@@ -230,7 +230,7 @@ class Trainer:
         param_groups = self.pipeline.get_param_groups()
         return Optimizers(optimizer_config, param_groups)
 
-    def train(self) -> None:
+    def train(self) -> dict:
         """Train the model."""
         assert self.pipeline.datamanager.train_dataset is not None, "Missing DatsetInputs"
         if hasattr(self.pipeline.datamanager, "train_dataparser_outputs"):
@@ -238,6 +238,7 @@ class Trainer:
                 self.base_dir / "dataparser_transforms.json"
             )
 
+        metrics_dict = {}
         self._init_viewer_state()
         with TimeWriter(writer, EventName.TOTAL_TRAIN_TIME):
             num_iterations = self.config.max_num_iterations - self._start_step
@@ -250,7 +251,7 @@ class Trainer:
                 while self.training_state == "paused":
                     if self.stop_training:
                         self._after_train()
-                        return
+                        return metrics_dict
                     time.sleep(0.01)
                 with self.train_lock:
                     with TimeWriter(writer, EventName.ITER_TRAIN_TIME, step=step) as train_t:
@@ -310,6 +311,7 @@ class Trainer:
 
         # save checkpoint at the end of training, and write out any remaining events
         self._after_train()
+        return metrics_dict
 
     def shutdown(self) -> None:
         """Stop the trainer and stop all associated threads/processes (such as the viewer)."""

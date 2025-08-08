@@ -98,7 +98,8 @@ def train_loop(local_rank: int, world_size: int, config: TrainerConfig, global_r
     _set_random_seed(config.machine.seed + global_rank)
     trainer = config.setup(local_rank=local_rank, world_size=world_size)
     trainer.setup()
-    trainer.train()
+    training_metrics_dict = trainer.train()
+    return training_metrics_dict
 
 
 def _distributed_worker(

@@ -41,7 +41,7 @@ class ComputePSNR:
     # Optional path to save rendered outputs to.
     render_output_path: Optional[Path] = None
 
-    def main(self) -> None:
+    def main(self) -> float:
         """Main function."""
         config, pipeline, checkpoint_path, _ = eval_setup(self.load_config)
         assert self.output_path.suffix == ".json"
@@ -59,6 +59,7 @@ class ComputePSNR:
         # Save output to output file
         self.output_path.write_text(json.dumps(benchmark_info, indent=2), "utf8")
         CONSOLE.print(f"Saved results to: {self.output_path}")
+        return benchmark_info["results"]["psnr"]
 
 
 def entrypoint():
